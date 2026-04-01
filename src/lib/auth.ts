@@ -38,3 +38,15 @@ export async function requireUser(): Promise<AuthUser> {
   }
   return user;
 }
+
+/**
+ * Core tenant enforcement method.
+ * All data access MUST be scoped through the organizationId returned here.
+ */
+export async function requireOrganization(): Promise<string> {
+  const user = await requireUser();
+  if (!user.organizationId) {
+    throw new Error("User does not belong to an organization. Tenant missing.");
+  }
+  return user.organizationId;
+}
