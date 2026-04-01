@@ -63,7 +63,7 @@ function LoginForm() {
           Don't have an account?{" "}
           <Link
             href="/signup"
-            className="font-medium text-indigo-600 hover:text-indigo-500"
+            className="font-medium text-gray-600 hover:text-gray-900 transition-colors"
           >
             Sign up
           </Link>
@@ -97,7 +97,7 @@ function LoginForm() {
               type="email"
               autoComplete="email"
               required
-              className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full rounded-lg border border-gray-200 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-gray-900 focus:outline-none focus:ring-gray-900 sm:text-sm transition-colors"
               placeholder="you@example.com"
               value={formData.email}
               onChange={handleChange}
@@ -116,7 +116,7 @@ function LoginForm() {
               type="password"
               autoComplete="current-password"
               required
-              className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full rounded-lg border border-gray-200 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-gray-900 focus:outline-none focus:ring-gray-900 sm:text-sm transition-colors"
               placeholder="••••••••"
               value={formData.password}
               onChange={handleChange}

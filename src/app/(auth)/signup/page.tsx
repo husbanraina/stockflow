@@ -59,7 +59,7 @@ export default function Signup() {
           Already have an account?{" "}
           <Link
             href="/login"
-            className="font-medium text-indigo-600 hover:text-indigo-500"
+            className="font-medium text-gray-600 hover:text-gray-900 transition-colors"
           >
             Sign in
           </Link>
@@ -86,7 +86,7 @@ export default function Signup() {
               name="organizationName"
               type="text"
               required
-              className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full rounded-lg border border-gray-200 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-gray-900 focus:outline-none focus:ring-gray-900 sm:text-sm transition-colors"
               placeholder="Acme Corp"
               value={formData.organizationName}
               onChange={handleChange}
@@ -105,7 +105,7 @@ export default function Signup() {
               type="email"
               autoComplete="email"
               required
-              className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full rounded-lg border border-gray-200 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-gray-900 focus:outline-none focus:ring-gray-900 sm:text-sm transition-colors"
               placeholder="you@example.com"
               value={formData.email}
               onChange={handleChange}
@@ -124,7 +124,7 @@ export default function Signup() {
               type="password"
               autoComplete="new-password"
               required
-              className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full rounded-lg border border-gray-200 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-gray-900 focus:outline-none focus:ring-gray-900 sm:text-sm transition-colors"
               placeholder="••••••••"
               value={formData.password}
               onChange={handleChange}

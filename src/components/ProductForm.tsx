@@ -139,7 +139,8 @@ export default function ProductForm({ initialData, isEdit }: ProductFormProps) {
                 name="name"
                 id="name"
                 required
-                className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 block w-full rounded-lg border border-gray-200 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-gray-900 sm:text-sm transition-colors"
+                placeholder="AirPods Pro 2nd Gen"
                 value={formData.name}
                 onChange={handleChange}
               />
@@ -153,7 +154,8 @@ export default function ProductForm({ initialData, isEdit }: ProductFormProps) {
                 name="sku"
                 id="sku"
                 required
-                className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 block w-full rounded-lg border border-gray-200 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-gray-900 sm:text-sm transition-colors"
+                placeholder="AP-PRO-2"
                 value={formData.sku}
                 onChange={handleChange}
               />
@@ -168,7 +170,8 @@ export default function ProductForm({ initialData, isEdit }: ProductFormProps) {
               id="description"
               name="description"
               rows={3}
-              className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full rounded-lg border border-gray-200 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-gray-900 sm:text-sm transition-colors"
+              placeholder="Wireless noise-cancelling earbuds by Apple."
               value={formData.description}
               onChange={handleChange}
             />
@@ -185,7 +188,8 @@ export default function ProductForm({ initialData, isEdit }: ProductFormProps) {
                 id="quantity"
                 required
                 min="0"
-                className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 block w-full rounded-lg border border-gray-200 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-gray-900 sm:text-sm transition-colors"
+                placeholder="50"
                 value={formData.quantity}
                 onChange={handleChange}
               />
@@ -201,7 +205,8 @@ export default function ProductForm({ initialData, isEdit }: ProductFormProps) {
                 required
                 min="0"
                 step="0.01"
-                className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 block w-full rounded-lg border border-gray-200 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-gray-900 sm:text-sm transition-colors"
+                placeholder="199.00"
                 value={formData.costPrice}
                 onChange={handleChange}
               />
@@ -217,7 +222,8 @@ export default function ProductForm({ initialData, isEdit }: ProductFormProps) {
                 required
                 min="0"
                 step="0.01"
-                className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 block w-full rounded-lg border border-gray-200 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-gray-900 sm:text-sm transition-colors"
+                placeholder="249.00"
                 value={formData.sellingPrice}
                 onChange={handleChange}
               />
@@ -234,7 +240,8 @@ export default function ProductForm({ initialData, isEdit }: ProductFormProps) {
               name="lowStockThreshold"
               id="lowStockThreshold"
               min="0"
-              className="block w-full sm:w-1/3 rounded-lg border border-gray-300 px-3 py-2 text-gray-900 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+              className="block w-full sm:w-1/3 rounded-lg border border-gray-200 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-gray-900 sm:text-sm transition-colors"
+              placeholder="10"
               value={formData.lowStockThreshold}
               onChange={handleChange}
             />

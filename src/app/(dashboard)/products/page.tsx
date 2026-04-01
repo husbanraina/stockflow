@@ -74,7 +74,7 @@ export default function ProductsPage() {
               type="text"
               name="search"
               id="search"
-              className="block w-full rounded-lg border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-lg border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-900 sm:text-sm sm:leading-6 transition-colors"
               placeholder="Search by name or SKU..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -84,29 +84,35 @@ export default function ProductsPage() {
 
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+            <thead className="bg-gray-50/50">
               <tr>
                 <th
                   scope="col"
-                  className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                  className="py-3.5 pl-4 pr-3 text-left text-sm font-medium text-gray-500 sm:pl-6"
                 >
                   Name
                 </th>
                 <th
                   scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  className="px-3 py-3.5 text-left text-sm font-medium text-gray-500"
                 >
                   SKU
                 </th>
                 <th
                   scope="col"
-                  className="px-3 py-3.5 text-right text-sm font-semibold text-gray-900"
+                  className="px-3 py-3.5 text-right text-sm font-medium text-gray-500"
                 >
-                  Stock
+                  Quantity
                 </th>
                 <th
                   scope="col"
-                  className="px-3 py-3.5 text-right text-sm font-semibold text-gray-900"
+                  className="px-3 py-3.5 text-center text-sm font-medium text-gray-500"
+                >
+                  Status
+                </th>
+                <th
+                  scope="col"
+                  className="px-3 py-3.5 text-right text-sm font-medium text-gray-500"
                 >
                   Price
                 </th>
@@ -115,11 +121,11 @@ export default function ProductsPage() {
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200 bg-white">
+            <tbody className="divide-y divide-gray-100 bg-white">
               {loading ? (
                 <tr>
-                  <td colSpan={5} className="py-10 text-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-indigo-600 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <td colSpan={6} className="py-10 text-center">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-400 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
@@ -128,31 +134,34 @@ export default function ProductsPage() {
                 </tr>
               ) : products.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="py-10 text-center text-sm text-gray-500">
+                  <td colSpan={6} className="py-10 text-center text-sm text-gray-500">
                     No products found
                   </td>
                 </tr>
               ) : (
                 products.map((product) => (
-                  <tr key={product._id} className="hover:bg-gray-50">
+                  <tr key={product._id} className="hover:bg-gray-50/50 transition-colors">
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                       {product.name}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {product.sku}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-right">
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-right text-gray-900 font-medium">
+                      {product.quantity}
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-center">
                       {product.isOutOfStock ? (
-                        <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
+                        <span className="inline-flex items-center rounded-md bg-red-50/50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
                           Out of stock
                         </span>
                       ) : product.isLowStock ? (
-                        <span className="inline-flex items-center rounded-md bg-orange-50 px-2 py-1 text-xs font-medium text-orange-700 ring-1 ring-inset ring-orange-600/20">
-                          Low stock ({product.quantity})
+                        <span className="inline-flex items-center rounded-md bg-orange-50/50 px-2 py-1 text-xs font-medium text-orange-700 ring-1 ring-inset ring-orange-600/20">
+                          Low stock
                         </span>
                       ) : (
-                        <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                          {product.quantity} in stock
+                        <span className="inline-flex items-center rounded-md bg-green-50/50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                          In stock
                         </span>
                       )}
                     </td>
@@ -162,7 +171,7 @@ export default function ProductsPage() {
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                       <Link
                         href={`/products/${product._id}`}
-                        className="text-indigo-600 hover:text-indigo-900"
+                        className="text-gray-600 hover:text-gray-900 transition-colors"
                       >
                         Edit<span className="sr-only">, {product.name}</span>
                       </Link>

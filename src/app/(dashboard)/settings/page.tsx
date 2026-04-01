@@ -106,7 +106,8 @@ export default function SettingsPage() {
                 id="defaultThreshold"
                 min="0"
                 required
-                className="mt-1 block max-w-sm rounded-lg border border-gray-300 px-3 py-2 text-gray-900 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 block max-w-sm rounded-lg border border-gray-200 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-gray-900 sm:text-sm transition-colors"
+                placeholder="10"
                 value={defaultThreshold}
                 onChange={(e) => setDefaultThreshold(e.target.value === "" ? "" : Number(e.target.value))}
               />

@@ -79,8 +79,8 @@ export default function DashboardPage() {
         {/* Total Products Card */}
         <div className="relative overflow-hidden rounded-lg bg-white px-4 pb-12 pt-5 shadow-sm border border-gray-100 sm:px-6 sm:pt-6">
           <dt>
-            <div className="absolute rounded-md bg-indigo-50 p-3">
-              <ArchiveBoxIcon className="h-6 w-6 text-indigo-600" aria-hidden="true" />
+            <div className="absolute rounded-md bg-gray-100 p-3">
+              <ArchiveBoxIcon className="h-6 w-6 text-gray-700" aria-hidden="true" />
             </div>
             <p className="ml-16 truncate text-sm font-medium text-gray-500">
               Total Products
@@ -92,7 +92,7 @@ export default function DashboardPage() {
             </p>
             <div className="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
               <div className="text-sm">
-                <Link href="/products" className="font-medium text-indigo-600 hover:text-indigo-500">
+                <Link href="/products" className="font-medium text-gray-600 hover:text-gray-900">
                   View all<span className="sr-only"> Total Products</span>
                 </Link>
               </div>
@@ -153,47 +153,53 @@ export default function DashboardPage() {
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden mt-4">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+            <thead className="bg-gray-50/50">
               <tr>
-                <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-medium text-gray-500 sm:pl-6">
                   Name
                 </th>
-                <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                <th scope="col" className="px-3 py-3.5 text-left text-sm font-medium text-gray-500">
                   SKU
                 </th>
-                <th scope="col" className="px-3 py-3.5 text-right text-sm font-semibold text-gray-900">
-                  Stock
+                <th scope="col" className="px-3 py-3.5 text-right text-sm font-medium text-gray-500">
+                  Quantity
+                </th>
+                <th scope="col" className="px-3 py-3.5 text-center text-sm font-medium text-gray-500">
+                  Status
                 </th>
                 <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
                   <span className="sr-only">Action</span>
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200 bg-white">
+            <tbody className="divide-y divide-gray-100 bg-white">
               {!data?.lowStockItems || data.lowStockItems.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="py-10 text-center text-sm text-gray-500">
+                  <td colSpan={5} className="py-10 text-center text-sm text-gray-500">
                     No items are currently low on stock! 
                   </td>
                 </tr>
               ) : (
                 data.lowStockItems.map((item) => (
-                  <tr key={item._id} className="hover:bg-gray-50">
+                  <tr key={item._id} className="hover:bg-gray-50/50 transition-colors">
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                       {item.name}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {item.sku}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-right">
-                      <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
-                        {item.quantity} remaining
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-right text-gray-900 font-medium">
+                      {item.quantity}
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-center">
+                      <span className="inline-flex items-center rounded-md bg-red-50/50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
+                        Remaining
                       </span>
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                       <Link
                         href={`/products/${item._id}`}
-                        className="text-indigo-600 hover:text-indigo-900 inline-flex items-center"
+                        className="text-gray-600 hover:text-gray-900 inline-flex items-center transition-colors"
                       >
                         Restock <ArrowRightIcon className="ml-1 h-3 w-3" />
                       </Link>
