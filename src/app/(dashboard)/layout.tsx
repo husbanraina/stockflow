@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { UserCircleIcon, HomeIcon, CubeIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
+import SignOutButton from "@/components/SignOutButton";
 
 export default function DashboardLayout({
   children,
@@ -50,12 +51,7 @@ export default function DashboardLayout({
                 <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
                   Account
                 </p>
-                <Link
-                  href="/login"
-                  className="text-xs font-medium text-gray-500 hover:text-gray-700"
-                >
-                  <span className="block hover:underline">Sign Out</span>
-                </Link>
+                <SignOutButton />
               </div>
             </div>
           </div>
