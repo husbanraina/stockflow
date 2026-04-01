@@ -3,6 +3,35 @@ import dbConnect from "@/lib/db";
 import Product from "@/models/Product";
 import { requireOrganization } from "@/lib/auth";
 
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const organizationId = await requireOrganization();
+    await dbConnect();
+
+    const { id } = await params;
+
+    const product = await Product.findOne({
+      _id: id,
+      organizationId,
+    });
+
+    if (!product) {
+      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(product, { status: 200 });
+  } catch (error: any) {
+    console.error("Get Product Error:", error);
+    return NextResponse.json(
+      { error: error.message || "Failed to fetch product" },
+      { status: 500 }
+    );
+  }
+}
+
 export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }

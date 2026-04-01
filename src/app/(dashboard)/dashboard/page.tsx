@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   ArchiveBoxIcon,
   ExclamationTriangleIcon,
@@ -22,6 +23,7 @@ interface DashboardData {
 }
 
 export default function DashboardPage() {
+  const router = useRouter();
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -181,7 +183,11 @@ export default function DashboardPage() {
                 </tr>
               ) : (
                 data.lowStockItems.map((item) => (
-                  <tr key={item._id} className="hover:bg-gray-50/50 transition-colors">
+                  <tr 
+                    key={item._id} 
+                    className="hover:bg-gray-50/50 transition-colors cursor-pointer"
+                    onClick={() => router.push(`/products/${item._id}`)}
+                  >
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                       {item.name}
                     </td>
@@ -193,16 +199,19 @@ export default function DashboardPage() {
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-center">
                       <span className="inline-flex items-center rounded-md bg-red-50/50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
-                        Remaining
+                        Low stock
                       </span>
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                      <Link
-                        href={`/products/${item._id}`}
-                        className="text-gray-600 hover:text-gray-900 inline-flex items-center transition-colors"
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          router.push(`/products/${item._id}/edit`);
+                        }}
+                        className="text-gray-600 hover:text-gray-900 inline-flex items-center transition-colors font-medium"
                       >
                         Restock <ArrowRightIcon className="ml-1 h-3 w-3" />
-                      </Link>
+                      </button>
                     </td>
                   </tr>
                 ))

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { PlusIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 interface Product {
@@ -16,6 +17,7 @@ interface Product {
 }
 
 export default function ProductsPage() {
+  const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
@@ -140,7 +142,11 @@ export default function ProductsPage() {
                 </tr>
               ) : (
                 products.map((product) => (
-                  <tr key={product._id} className="hover:bg-gray-50/50 transition-colors">
+                  <tr 
+                    key={product._id} 
+                    className="hover:bg-gray-50/50 transition-colors cursor-pointer"
+                    onClick={() => router.push(`/products/${product._id}`)}
+                  >
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                       {product.name}
                     </td>
@@ -169,12 +175,15 @@ export default function ProductsPage() {
                       ${product.sellingPrice.toFixed(2)}
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                      <Link
-                        href={`/products/${product._id}`}
-                        className="text-gray-600 hover:text-gray-900 transition-colors"
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          router.push(`/products/${product._id}/edit`);
+                        }}
+                        className="text-gray-600 hover:text-gray-900 transition-colors font-medium text-sm"
                       >
                         Edit<span className="sr-only">, {product.name}</span>
-                      </Link>
+                      </button>
                     </td>
                   </tr>
                 ))

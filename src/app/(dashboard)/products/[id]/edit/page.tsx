@@ -4,7 +4,7 @@ import Product from "@/models/Product";
 import { requireOrganization } from "@/lib/auth";
 import { notFound } from "next/navigation";
 
-export default async function ViewProductPage({
+export default async function EditProductPage({
   params,
 }: {
   params: Promise<{ id: string }>;
@@ -30,13 +30,13 @@ export default async function ViewProductPage({
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold text-gray-900">View Product</h1>
+        <h1 className="text-2xl font-semibold text-gray-900">Edit Product</h1>
         <p className="mt-1 text-sm text-gray-500">
-          Product details and status.
+          Update the details of your inventory item.
         </p>
       </div>
 
-      <ProductForm initialData={initialData} isViewOnly={true} />
+      <ProductForm initialData={initialData} isEdit={true} />
     </div>
   );
 }
