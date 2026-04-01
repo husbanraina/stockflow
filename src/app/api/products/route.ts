@@ -84,8 +84,23 @@ export async function GET(request: Request) {
 
     // Default sorting by newest first
     const products = await Product.find(query).sort({ createdAt: -1 });
+    
+    // Fetch settings for global low stock threshold fallback
+    const Settings = (await import("@/models/Settings")).default;
+    const settings = await Settings.findOne({ organizationId });
+    const defaultThreshold = settings?.defaultLowStockThreshold || 10;
 
-    return NextResponse.json(products, { status: 200 });
+    // Map over products to calculate isLowStock dynamically
+    const enrichedProducts = products.map((product) => {
+      const threshold = product.lowStockThreshold ?? defaultThreshold;
+      return {
+        ...product.toJSON(),
+        isLowStock: product.quantity <= threshold && product.quantity > 0,
+        isOutOfStock: product.quantity === 0
+      };
+    });
+
+    return NextResponse.json(enrichedProducts, { status: 200 });
   } catch (error: any) {
     console.error("Fetch Products Error:", error);
     return NextResponse.json(
