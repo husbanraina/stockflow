@@ -1,0 +1,64 @@
+import { NextResponse } from "next/server";
+import dbConnect from "@/lib/db";
+import Product from "@/models/Product";
+import { requireOrganization } from "@/lib/auth";
+
+export async function POST(request: Request) {
+  try {
+    const organizationId = await requireOrganization();
+    await dbConnect();
+
+    const body = await request.json();
+    const {
+      name,
+      sku,
+      description,
+      quantity,
+      costPrice,
+      sellingPrice,
+      lowStockThreshold,
+    } = body;
+
+    // Validate main required fields
+    if (
+      !name ||
+      !sku ||
+      quantity === undefined ||
+      costPrice === undefined ||
+      sellingPrice === undefined
+    ) {
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      );
+    }
+
+    // Check if SKU already exists for this organization (since SKU is unique per org)
+    const existingProduct = await Product.findOne({ organizationId, sku });
+    if (existingProduct) {
+      return NextResponse.json(
+        { error: "Product with this SKU already exists" },
+        { status: 409 }
+      );
+    }
+
+    const newProduct = await Product.create({
+      organizationId,
+      name,
+      sku,
+      description,
+      quantity,
+      costPrice,
+      sellingPrice,
+      lowStockThreshold,
+    });
+
+    return NextResponse.json(newProduct, { status: 201 });
+  } catch (error: any) {
+    console.error("Create Product Error:", error);
+    return NextResponse.json(
+      { error: error.message || "Failed to create product" },
+      { status: 500 }
+    );
+  }
+}
