@@ -22,7 +22,7 @@ export async function POST(request: Request) {
 
     // Find user
     const user = await User.findOne({ email: email.toLowerCase() });
-    if (!user) {
+    if (!user || !user.password) {
       return NextResponse.json(
         { error: "Invalid credentials" },
         { status: 401 }
