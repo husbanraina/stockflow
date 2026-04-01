@@ -62,3 +62,36 @@ export async function POST(request: Request) {
     );
   }
 }
+
+export async function GET(request: Request) {
+  try {
+    const organizationId = await requireOrganization();
+    await dbConnect();
+
+    // Setup search filter
+    const url = new URL(request.url);
+    const search = url.searchParams.get("search");
+
+    let query: any = { organizationId };
+
+    // Support searching optionally by name or SKU
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: "i" } },
+        { sku: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    // Default sorting by newest first
+    const products = await Product.find(query).sort({ createdAt: -1 });
+
+    return NextResponse.json(products, { status: 200 });
+  } catch (error: any) {
+    console.error("Fetch Products Error:", error);
+    return NextResponse.json(
+      { error: error.message || "Failed to fetch products" },
+      { status: 500 }
+    );
+  }
+}
+
