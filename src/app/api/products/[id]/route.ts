@@ -81,3 +81,36 @@ export async function PUT(
     );
   }
 }
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const organizationId = await requireOrganization();
+    await dbConnect();
+
+    const { id } = await params;
+
+    const deletedProduct = await Product.findOneAndDelete({
+      _id: id,
+      organizationId,
+    });
+
+    if (!deletedProduct) {
+      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(
+      { message: "Product deleted successfully" },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error("Delete Product Error:", error);
+    return NextResponse.json(
+      { error: error.message || "Failed to delete product" },
+      { status: 500 }
+    );
+  }
+}
+
